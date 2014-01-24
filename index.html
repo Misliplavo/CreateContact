@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Contact Example</title>
+
+		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+		<script>
+			document.addEventListener("deviceready", onDeviceReady, false);
+
+			function onDeviceReady() {
+				$('#btnSave').addEventListener("click", onSave, false);
+			}
+
+			function onSave() {
+				var name = $("first").value + " " + $("second").value;
+				var note = $("note").value;
+				var work = $("work").value;
+				var mobile = $("mobile").value;
+
+				var contact = navigator.contacts.create();
+
+				contact.displayName = name;
+				contact.note = note;
+
+				// store contact phone numbers in ContactField[]
+				var phoneNumbers = [];
+				phoneNumbers[0] = new ContactField('work', work, false);
+				phoneNumbers[1] = new ContactField('mobile', mobile, true);
+				// preferred number
+				
+				contact.phoneNumbers = phoneNumbers;
+
+				// save the contact
+				contact.save();
+
+				alert("Contact saved!");
+			}
+
+		</script>
+	</head>
+	<body>
+		<h1>Contact creator</h1>
+		<p>
+			Input basic contact details
+		</p>
+		<form>
+			<label for="first">Name</label>
+			<br />
+			<input type="text" id="first" />
+			<br />
+			<label for="second">Surname</label>
+			<br />
+			<input type="text" id="second" />
+			<br/>
+			<label for="work">Work</label>
+			<br />
+			<input type="text" id="work" />
+			<br/>
+			<label for="mobile">Mobile</label>
+			<br />
+			<input type="text" id="mobile" />
+			<br/>
+			<label for="note">Note</label>
+			<br />
+			<textarea id="note"></textarea>
+			<br />
+			<input type="button" value="Save" id="btnSave"/>
+		</form>
+	</body>
+</html>
