@@ -5,11 +5,13 @@
 
 		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 		<script>
-			document.addEventListener("deviceready", onDeviceReady, false);
-
+			window.onload = function() {
+				document.addEventListener("deviceready", onDeviceReady, false);
+			};
+			
 			function onDeviceReady() {
 				$('#btnSave').addEventListener("click", onSave, false);
-			}
+			};
 
 			function onSave() {
 				var name = $("first").value + " " + $("second").value;
@@ -27,14 +29,14 @@
 				phoneNumbers[0] = new ContactField('work', work, false);
 				phoneNumbers[1] = new ContactField('mobile', mobile, true);
 				// preferred number
-				
+
 				contact.phoneNumbers = phoneNumbers;
 
 				// save the contact
 				contact.save();
 
 				alert("Contact saved!");
-			}
+			};
 
 		</script>
 	</head>
